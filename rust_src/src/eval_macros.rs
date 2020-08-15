@@ -114,3 +114,7 @@ macro_rules! error {
         xsignal!(crate::remacs_sys::Qerror, strobj);
     }};
 }
+
+macro_rules! args_out_of_range {
+    ($($tt:tt)+) => { xsignal!(crate::remacs_sys::Qargs_out_of_range, $($tt)+); };
+}

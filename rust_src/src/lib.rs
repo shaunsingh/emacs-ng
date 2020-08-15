@@ -35,19 +35,25 @@ mod remacs_sys;
 mod lisp;
 #[macro_use]
 mod eval_macros;
+#[macro_use]
+mod vector_macros;
 mod ng_async;
 
 mod eval;
+mod fonts;
 mod frame;
 mod lists;
 mod multibyte;
+mod numbers;
+mod obarray;
 mod process;
+mod symbols;
 mod vectors;
+#[cfg(feature = "window-system-webrender")]
+mod webrender;
 mod windows;
 #[cfg(feature = "window-system-webrender")]
 mod wrterm;
-#[cfg(feature = "window-system-webrender")]
-mod webrender;
 
 #[cfg(feature = "window-system-webrender")]
 pub use crate::wrterm::{tip_frame, wr_display_list};
