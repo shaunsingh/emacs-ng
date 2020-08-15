@@ -7,9 +7,10 @@ use super::display_info::{DisplayInfo, DisplayInfoRef};
 use crate::{
     lisp::{ExternalPtr, LispObject},
     remacs_sys::{
-        allocate_kboard, create_terminal, current_kboard, frame_parm_handler, gui_set_font,
-        gui_set_font_backend, initial_kboard, output_method, redisplay_interface, terminal,
-        xlispstrdup, Fcons, Qnil, Qwr, KBOARD,
+        allocate_kboard, create_terminal, current_kboard, frame_parm_handler, glyph_row,
+        glyph_string, gui_set_font, gui_set_font_backend, initial_kboard, output_method,
+        redisplay_interface, terminal, xlispstrdup, Fcons, Lisp_Frame, Lisp_Window, Qnil, Qwr,
+        KBOARD,
     },
 };
 
@@ -98,9 +99,9 @@ lazy_static! {
             clear_end_of_line: None,
             clear_under_internal_border: None,
             scroll_run_hook: None,
-            after_update_window_line_hook: None,
-            update_window_begin_hook: None,
-            update_window_end_hook: None,
+            after_update_window_line_hook: Some(after_update_window_line),
+            update_window_begin_hook: Some(update_window_begin),
+            update_window_end_hook: Some(update_window_end),
             flush_display: None,
             clear_window_mouse_face: None,
             get_glyph_overhangs: None,
@@ -109,10 +110,10 @@ lazy_static! {
             define_fringe_bitmap: None,
             destroy_fringe_bitmap: None,
             compute_glyph_string_overhangs: None,
-            draw_glyph_string: None,
+            draw_glyph_string: Some(draw_glyph_string),
             define_frame_cursor: None,
             default_font_parameter: None,
-            clear_frame_area: None,
+            clear_frame_area: Some(clear_frame_area),
             draw_window_cursor: None,
             draw_vertical_window_border: None,
             draw_window_divider: None,
@@ -124,6 +125,26 @@ lazy_static! {
         RedisplayInterfaceRef::new(Box::into_raw(interface))
     };
 }
+
+#[allow(unused_variables)]
+extern "C" fn update_window_begin(w: *mut Lisp_Window) {}
+
+#[allow(unused_variables)]
+extern "C" fn update_window_end(
+    w: *mut Lisp_Window,
+    cursor_no_p: bool,
+    mouse_face_overwritten_p: bool,
+) {
+}
+
+#[allow(unused_variables)]
+extern "C" fn after_update_window_line(w: *mut Lisp_Window, desired_row: *mut glyph_row) {}
+
+#[allow(unused_variables)]
+extern "C" fn draw_glyph_string(s: *mut glyph_string) {}
+
+#[allow(unused_variables)]
+extern "C" fn clear_frame_area(s: *mut Lisp_Frame, x: i32, y: i32, width: i32, height: i32) {}
 
 extern "C" fn get_string_resource(
     _rdb: *mut libc::c_void,

@@ -38,7 +38,6 @@ lazy_static! {
         font_driver.list_family = Some(list_family);
         font_driver.open_font = Some(open_font);
         font_driver.close_font = Some(close_font);
-        font_driver.has_char = Some(has_char);
         font_driver.encode_char = Some(encode_char);
         font_driver.text_extents = Some(text_extents);
         font_driver.draw = Some(draw);
@@ -208,14 +207,8 @@ extern "C" fn close_font(font: *mut font) {
     unimplemented!();
 }
 
-#[allow(unused_variables)]
-extern "C" fn has_char(font: LispObject, c: i32) -> i32 {
-    unimplemented!();
-}
-
-#[allow(unused_variables)]
-extern "C" fn encode_char(font: *mut font, c: i32) -> u32 {
-    unimplemented!();
+extern "C" fn encode_char(_font: *mut font, c: i32) -> u32 {
+    c as u32
 }
 
 #[allow(unused_variables)]
