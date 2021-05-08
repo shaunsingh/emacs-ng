@@ -299,13 +299,17 @@ extern "C" fn open_font(frame: *mut frame, font_entity: LispObject, pixel_size: 
 
     let mut pixel_size = pixel_size as i64;
 
+    println!("open_font pixel_size 1 : {}", pixel_size);
     if pixel_size == 0 {
         pixel_size = if !output.font.is_null() {
+            println!("open_font pixel_size 3");
             output.font.pixel_size as i64
         } else {
+            println!("open_font pixel_size 3");
             15
         };
     }
+    println!("open_font pixel_size 4 : {}", pixel_size);
 
     let font_object: LispFontLike = unsafe {
         font_make_object(

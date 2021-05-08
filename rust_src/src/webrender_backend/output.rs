@@ -168,6 +168,8 @@ impl Output {
                 DeviceIntSize::new(size.width as i32, size.height as i32)
             };
 
+            println!("Init webrender: ({:?}) - {}", device_size, device_pixel_ratio);
+
             let webrender_opts = webrender::RendererOptions {
                 device_pixel_ratio,
                 clear_color: None,
@@ -264,6 +266,7 @@ impl Output {
                             device_pixel_ratio,
                         );
 
+                        println!("Window resized: ({:?}) - {}", device_size, device_pixel_ratio);
                         current_context.resize(size);
 
                         gl.clear_color(1.0, 1.0, 1.0, 1.0);
@@ -322,6 +325,13 @@ impl Output {
                             copy_rect.to_f32() * LayoutToDeviceScale::new(device_pixel_ratio);
 
                         copy_framebuffer_to_texture(device_rect.to_i32(), sender, &renderer);
+                    }
+                    Event::WindowEvent {
+                        event: WindowEvent::ScaleFactorChanged{scale_factor, new_inner_size},
+                        ..
+                    } => {
+                        println!("scale factor changed: {:?} {}", new_inner_size, scale_factor);
+
                     }
                     _ => {}
                 };
