@@ -1,14 +1,16 @@
 //! wrterm.rs
 
-use std::ffi::CString;
 use std::ptr;
+use std::{ffi::CString, sync::Arc};
 
 use glutin::{event::VirtualKeyCode, monitor::MonitorHandle};
 
+use libc::c_void;
 use lisp_macros::lisp_fn;
+use webrender::api::ColorF;
 
 use crate::webrender_backend::{
-    color::lookup_color_by_name_or_hex,
+    color::{color_to_pixel, lookup_color_by_name_or_hex, pixel_to_color},
     font::{FontRef, FONT_DRIVER},
     frame::create_frame,
     input::winit_keycode_emacs_key_name,
@@ -20,11 +22,11 @@ use emacs::{
     bindings::globals,
     bindings::resource_types::{RES_TYPE_NUMBER, RES_TYPE_STRING, RES_TYPE_SYMBOL},
     bindings::{
-        adjust_frame_size, block_input, gui_display_get_arg, hashtest_eql, image, init_frame_faces,
-        list3i, make_fixnum, make_hash_table, make_monitor_attribute_list, register_font_driver,
-        unblock_input, Display, Emacs_Pixmap, Emacs_Rectangle, Fcons, Fcopy_alist, Fmake_vector,
-        Fprovide, MonitorInfo, Pixmap, Vframe_list, WRImage, Window, DEFAULT_REHASH_SIZE,
-        DEFAULT_REHASH_THRESHOLD,
+        adjust_frame_size, block_input, gui_display_get_arg, hashtest_eql, image as Emacs_Image,
+        init_frame_faces, list3i, make_fixnum, make_hash_table, make_monitor_attribute_list,
+        register_font_driver, unblock_input, Display, Emacs_Pix_Container, Emacs_Pixmap,
+        Emacs_Rectangle, Fcons, Fcopy_alist, Fmake_vector, Fprovide, MonitorInfo, Vframe_list,
+        Window, DEFAULT_REHASH_SIZE, DEFAULT_REHASH_THRESHOLD,
     },
     definitions::EmacsInt,
     frame::{window_frame_live_or_selected, LispFrameRef},
@@ -39,7 +41,6 @@ use emacs::{
 pub use crate::webrender_backend::display_info::{DisplayInfo, DisplayInfoRef};
 
 pub type DisplayRef = ExternalPtr<Display>;
-pub type ImageRef = ExternalPtr<WRImage>;
 
 #[no_mangle]
 pub static tip_frame: LispObject = Qnil;
@@ -80,22 +81,104 @@ pub extern "C" fn wr_get_baseline_offset(output: OutputRef) -> i32 {
     0
 }
 
-#[allow(unused_variables)]
+use crate::webrender_backend::image::WrImage;
+use crate::webrender_backend::image::WrPixmap;
+
 #[no_mangle]
-pub extern "C" fn wr_get_pixel(ximg: ImageRef, x: i32, y: i32) -> i32 {
-    unimplemented!();
+pub extern "C" fn wr_get_pixel(ximg: Emacs_Pix_Container, x: i32, y: i32) -> i32 {
+    // unimplemented!();
+    use image::Pixel;
+
+    let buffer = ximg as *mut WrImage;
+    let pixel = unsafe { (*buffer).image_buffer.get_pixel(x as u32, y as u32) };
+
+    let pixel = pixel.channels4();
+
+    color_to_pixel(ColorF::new(
+        pixel.0 as f32 / 255.0,
+        pixel.1 as f32 / 255.0,
+        pixel.2 as f32 / 255.0,
+        pixel.3 as f32 / 255.0,
+    )) as i32
 }
 
-#[allow(unused_variables)]
 #[no_mangle]
-pub extern "C" fn wr_put_pixel(ximg: ImageRef, x: i32, y: i32, pixel: u64) {
-    unimplemented!();
+pub extern "C" fn wr_put_pixel(ximg: Emacs_Pix_Container, x: i32, y: i32, pixel: u64) {
+    use image::Pixel;
+
+    let buffer = ximg as *mut WrImage;
+
+    let color = pixel_to_color(pixel);
+    let color = image::Rgba::<u8>::from_channels(
+        (color.r * 255.0) as u8,
+        (color.g * 255.0) as u8,
+        (color.b * 255.0) as u8,
+        (color.a * 255.0) as u8,
+    );
+
+    unsafe { (*buffer).image_buffer.put_pixel(x as u32, y as u32, color) };
 }
 
-#[allow(unused_variables)]
 #[no_mangle]
-pub extern "C" fn wr_free_pixmap(display: DisplayRef, pixmap: Pixmap) -> i32 {
-    unimplemented!();
+pub extern "C" fn wr_create_x_image_and_pixmap(
+    frame: LispFrameRef,
+    width: i32,
+    height: i32,
+    _depth: i32,
+    pimg: *mut Emacs_Pix_Container,
+    pixmap: *mut Emacs_Pixmap,
+) -> bool {
+    let len = (width * height * 4) as usize;
+    let buffer: Vec<u8> = vec![0; len];
+
+    let image_buffer = Box::new(WrImage {
+        image_buffer: image::ImageBuffer::from_raw(width as u32, height as u32, buffer.clone())
+            .unwrap(),
+    });
+
+    let ptr = Box::into_raw(image_buffer);
+
+    unsafe { (*pimg) = ptr as *mut c_void };
+
+    let output: OutputRef = unsafe { frame.output_data.wr.into() };
+
+    let image_key = output.add_image(width, height, Arc::new(buffer));
+
+    let wr_pixmap = Box::new(WrPixmap { image_key });
+
+    let wr_pixmap_ptr = Box::into_raw(wr_pixmap);
+
+    unsafe { (*pixmap) = wr_pixmap_ptr as *mut c_void };
+
+    true
+}
+#[no_mangle]
+pub extern "C" fn wr_image_destroy_x_image(pimg: Emacs_Pix_Container) {
+    println!("destory_x_image");
+    // take back ownership and RAII will drop resource.
+    unsafe { Box::from_raw(pimg as *mut WrImage) };
+}
+
+#[no_mangle]
+pub extern "C" fn wr_gui_put_x_image(
+    frame: LispFrameRef,
+    pimg: Emacs_Pix_Container,
+    pixmap: Emacs_Pixmap,
+    width: i32,
+    height: i32,
+) {
+    let wr_image = pimg as *mut WrImage;
+    let wr_pixmap = pixmap as *mut WrPixmap;
+
+    let image_data = unsafe { (*wr_image).image_buffer.as_raw().clone() };
+
+    let image_key = unsafe { (*wr_pixmap).image_key };
+
+    let output: OutputRef = unsafe { frame.output_data.wr.into() };
+
+    output.update_image(image_key, width, height, Arc::new(image_data));
+
+    println!("x_image");
 }
 
 #[no_mangle]
@@ -125,7 +208,7 @@ pub extern "C" fn frame_set_mouse_pixel_position(f: LispFrameRef, pix_x: i32, pi
 }
 
 #[no_mangle]
-pub extern "C" fn image_sync_to_pixmaps(_frame: LispFrameRef, _img: *mut image) {
+pub extern "C" fn image_sync_to_pixmaps(_frame: LispFrameRef, _img: *mut Emacs_Image) {
     unimplemented!();
 }
 

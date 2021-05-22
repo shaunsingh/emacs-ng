@@ -2,6 +2,8 @@ use std::cmp::min;
 
 use webrender::{self, api::units::*, api::*};
 
+use crate::webrender_backend::image::WrPixmap;
+
 use super::{
     color::{color_to_pixel, pixel_to_color},
     display_info::DisplayInfoRef,
@@ -91,6 +93,7 @@ impl DrawCanvas {
         match type_ {
             glyph_type::CHAR_GLYPH => self.draw_char_glyph_string(s),
             glyph_type::STRETCH_GLYPH => self.draw_stretch_glyph_string(s),
+            glyph_type::IMAGE_GLYPH => self.draw_image_glyph(s),
             _ => {}
         }
     }
@@ -216,6 +219,47 @@ impl DrawCanvas {
         });
 
         s.set_background_filled_p(true);
+    }
+
+    fn draw_image_glyph(&mut self, s: GlyphStringRef) {
+        // let x_start = s.x;
+        // let y_start = s.y;
+
+        println!(
+            "image {} {} {} {} {:?}",
+            s.x,
+            s.y,
+            s.slice.width(),
+            s.slice.height(),
+            unsafe { (*s.img).pixmap },
+        );
+
+        let wr_pixmap = unsafe { (*s.img).pixmap } as *mut WrPixmap;
+
+        let image_key = unsafe { (*wr_pixmap).image_key };
+
+        self.output.display(|builder, space_and_clip| {
+            // builder.push_rect(
+            //     &CommonItemProperties::new(
+            //         (s.x, s.y).by(s.slice.width() as i32 - 1, s.slice.height() as i32 - 1),
+            //         space_and_clip,
+            //     ),
+            //     ColorF::BLACK,
+            // );
+
+            let bounds = (s.x, s.y).by(s.slice.width() as i32 - 1, s.slice.height() as i32 - 1);
+
+            builder.push_image(
+                &CommonItemProperties::new(bounds, space_and_clip),
+                bounds,
+                ImageRendering::Auto,
+                AlphaType::PremultipliedAlpha,
+                image_key,
+                ColorF::WHITE,
+            );
+        });
+        // x_draw_rectangle (s->f, s->gc, x, y,
+        //                   s->slice.width - 1, s->slice.height - 1);
     }
 
     fn draw_underline(

@@ -139,6 +139,13 @@ typedef struct wr_bitmap_record Bitmap_Record;
 #define PIX_MASK_RETAIN	0
 #define PIX_MASK_DRAW	1
 
+bool wr_create_x_image_and_pixmap (struct frame *f, int width, int height, int depth, Emacs_Pix_Container *pimg, Emacs_Pixmap *pixmap);
+
+void wr_image_destroy_x_image(Emacs_Pix_Container pimg);
+
+void wr_gui_put_x_image (struct frame *f, Emacs_Pix_Container pimg,
+                 Emacs_Pixmap pixmap, int width, int height);
+
 #endif /* WITH_WEBRENDER */
 
 
@@ -2936,6 +2943,10 @@ image_create_x_image_and_pixmap_1 (struct frame *f, int width, int height, int d
   *pimg = *pixmap;
   return 1;
 #endif
+
+#ifdef USE_WEBRENDER
+  return wr_create_x_image_and_pixmap (f, width, height, depth, pimg, pixmap);
+#endif
 }
 
 
@@ -2950,6 +2961,10 @@ image_destroy_x_image (Emacs_Pix_Container pimg)
   eassert (input_blocked_p ());
   if (pimg)
     {
+#ifdef USE_WEBRENDER
+      wr_image_destroy_x_image(pimg);
+#endif
+
 #ifdef USE_CAIRO
 #endif	/* USE_CAIRO */
 #ifdef HAVE_NTGUI
@@ -2996,6 +3011,10 @@ gui_put_x_image (struct frame *f, Emacs_Pix_Container pimg,
 #ifdef HAVE_NS
   eassert (pimg == pixmap);
   ns_retain_object (pimg);
+#endif
+
+#ifdef USE_WEBRENDER
+  wr_gui_put_x_image(f, pimg, pixmap, width, height);
 #endif
 }
 

@@ -455,6 +455,7 @@ extern "C" fn clear_frame(f: *mut Lisp_Frame) {
 extern "C" fn scroll_run(w: *mut Lisp_Window, run: *mut run) {
     let window: LispWindowRef = w.into();
     let frame = window.get_frame();
+
     let output: OutputRef = unsafe { frame.output_data.wr.into() };
 
     let (x, y, width, height) = unsafe {

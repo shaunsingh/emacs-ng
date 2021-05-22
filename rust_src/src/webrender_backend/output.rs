@@ -2,7 +2,10 @@ use std::{
     cell::RefCell,
     os::raw::c_void,
     rc::Rc,
-    sync::mpsc::{channel, sync_channel, Receiver, SyncSender},
+    sync::{
+        mpsc::{channel, sync_channel, Receiver, SyncSender},
+        Arc,
+    },
     thread::JoinHandle,
 };
 
@@ -647,6 +650,38 @@ impl Output {
         let cursor = emacs_to_winit_cursor(cursor);
 
         self.window.set_cursor_icon(cursor)
+    }
+
+    pub fn add_image(&self, width: i32, height: i32, image_data: Arc<Vec<u8>>) -> ImageKey {
+        let image_key = self.render_api.generate_image_key();
+
+        self.update_image(image_key, width, height, image_data);
+
+        image_key
+    }
+
+    pub fn update_image(
+        &self,
+        image_key: ImageKey,
+        width: i32,
+        height: i32,
+        image_data: Arc<Vec<u8>>,
+    ) {
+        let mut txn = Transaction::new();
+
+        txn.add_image(
+            image_key,
+            ImageDescriptor::new(
+                width as i32,
+                height as i32,
+                ImageFormat::RGBA8,
+                ImageDescriptorFlags::IS_OPAQUE,
+            ),
+            ImageData::Raw(image_data),
+            None,
+        );
+
+        self.render_api.send_transaction(self.document_id, txn);
     }
 }
 
