@@ -801,6 +801,16 @@ extern "C" fn update_end(f: *mut Lisp_Frame) {
     dpyinfo.mouse_highlight.set_mouse_face_defer(false);
 }
 
+extern "C" fn query_frame_background_color(frame: *mut Lisp_Frame, bg_color: *mut Emacs_Color) {
+    let frame: LispFrameRef = frame.into();
+    let output: OutputRef = unsafe { frame.output_data.wr.into() };
+
+    let background_color = output.background_color;
+
+    println!("query");
+    color_to_xcolor(background_color, bg_color);
+}
+
 fn wr_create_terminal(mut dpyinfo: DisplayInfoRef) -> TerminalRef {
     let terminal_ptr = unsafe {
         create_terminal(
@@ -831,6 +841,7 @@ fn wr_create_terminal(mut dpyinfo: DisplayInfoRef) -> TerminalRef {
     terminal.iconify_frame_hook = Some(iconify_frame);
     terminal.mouse_position_hook = Some(mouse_position);
     terminal.update_end_hook = Some(update_end);
+    terminal.query_frame_background_color = Some(query_frame_background_color);
 
     terminal
 }

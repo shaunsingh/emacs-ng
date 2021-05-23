@@ -5479,6 +5479,8 @@ lookup_rgb_color (struct frame *f, int r, int g, int b)
   return PALETTERGB (r >> 8, g >> 8, b >> 8);
 #elif defined USE_CAIRO || defined HAVE_NS
   return RGB_TO_ULONG (r >> 8, g >> 8, b >> 8);
+#elif defined USE_WEBRENDER
+  return ((unsigned long)b << 32) | ((unsigned long)g << 16) | (unsigned long)r;
 #else
   xsignal1 (Qfile_error,
 	    build_string ("This Emacs mishandles this image file type"));
