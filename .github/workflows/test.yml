@@ -174,7 +174,7 @@ jobs:
             - name: configure(general)
               if: ${{ matrix.build == 'general' }}
               run: |
-                  ./configure --enable-checking=glyphs --enable-rust-debug
+                  ./configure --enable-checking=glyphs --enable-rust-debug  --with-webrender
 
             - name: configure(webrender)
               if: ${{ matrix.build == 'webrender' }}
