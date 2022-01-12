@@ -11,21 +11,21 @@
       
       
       
-        <link rel="canonical" href="https://emacs-ng.github.io/emacs-ng/js/adv-features/">
+        <link rel="canonical" href="https://emacs-ng.github.io/emacs-ng/package-management/">
       
-      <link rel="shortcut icon" href="../../images/logo.png">
+      <link rel="shortcut icon" href="../images/logo.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.5">
     
     
       
-        <title>Advanced features - Emacs NG - A new approach to Emacs</title>
+        <title>Package management - Emacs NG - A new approach to Emacs</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.77f3fd56.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.77f3fd56.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.7fa14f5b.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.7fa14f5b.min.css">
         
       
     
@@ -40,7 +40,7 @@
     
     
     
-      <link rel="stylesheet" href="../../stylesheets/layout.css">
+      <link rel="stylesheet" href="../stylesheets/layout.css">
     
     
       
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#advanced-features" class="md-skip">
+        <a href="#built-in-emacs-lisp-packages" class="md-skip">
           Skip to content
         </a>
       
@@ -79,7 +79,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="https://emacs-ng.github.io/emacs-ng" title="Emacs NG - A new approach to Emacs" class="md-header__button md-logo" aria-label="Emacs NG - A new approach to Emacs">
       
-  <img src="../../images/logo.png" alt="logo">
+  <img src="../images/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -95,7 +95,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Advanced features
+              Package management
             
           </span>
         </div>
@@ -164,13 +164,15 @@
         
   
   
+    
+  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href=".." class="md-tabs__link md-tabs__link--active">
         Home
       </a>
     </li>
@@ -180,15 +182,13 @@
         
   
   
-    
-  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../using-deno/" class="md-tabs__link md-tabs__link--active">
+      <a href="../js/using-deno/" class="md-tabs__link">
         Deno/Javascript
       </a>
     </li>
@@ -201,7 +201,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../webrender/" class="md-tabs__link">
+    <a href="../webrender/" class="md-tabs__link">
       Webrender
     </a>
   </li>
@@ -213,7 +213,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../ng-module/" class="md-tabs__link">
+    <a href="../ng-module/" class="md-tabs__link">
       Dynamic modules
     </a>
   </li>
@@ -225,7 +225,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../faq/" class="md-tabs__link">
+    <a href="../faq/" class="md-tabs__link">
       FAQ
     </a>
   </li>
@@ -240,7 +240,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../handbook/getting-started/" class="md-tabs__link">
+      <a href="../handbook/getting-started/" class="md-tabs__link">
         Native Hackers Handbook
       </a>
     </li>
@@ -271,7 +271,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="https://emacs-ng.github.io/emacs-ng" title="Emacs NG - A new approach to Emacs" class="md-nav__button md-logo" aria-label="Emacs NG - A new approach to Emacs">
       
-  <img src="../../images/logo.png" alt="logo">
+  <img src="../images/logo.png" alt="logo">
 
     </a>
     Emacs NG - A new approach to Emacs
@@ -298,12 +298,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
       
       <label class="md-nav__link" for="__nav_1">
         Home
@@ -321,7 +323,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         Overview
       </a>
     </li>
@@ -354,7 +356,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build/building/" class="md-nav__link">
+      <a href="../build/building/" class="md-nav__link">
         Build from source
       </a>
     </li>
@@ -366,7 +368,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build/docker/" class="md-nav__link">
+      <a href="../build/docker/" class="md-nav__link">
         Build with Docker
       </a>
     </li>
@@ -378,7 +380,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build/release/" class="md-nav__link">
+      <a href="../build/release/" class="md-nav__link">
         Release .deb package
       </a>
     </li>
@@ -390,7 +392,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build/nix-develop/" class="md-nav__link">
+      <a href="../build/nix-develop/" class="md-nav__link">
         Nix Build / Develop
       </a>
     </li>
@@ -399,86 +401,6 @@
           
         </ul>
       </nav>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../package-management/" class="md-nav__link">
-        Package management
-      </a>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-    
-  
-  
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
-      
-      <label class="md-nav__link" for="__nav_2">
-        Deno/Javascript
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="Deno/Javascript" data-md-level="1">
-        <label class="md-nav__title" for="__nav_2">
-          <span class="md-nav__icon md-icon"></span>
-          Deno/Javascript
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../using-deno/" class="md-nav__link">
-        Using Deno
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../getting-started/" class="md-nav__link">
-        Getting started
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../main-features/" class="md-nav__link">
-        Basic features
-      </a>
     </li>
   
 
@@ -497,12 +419,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Advanced features
+          Package management
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Advanced features
+        Package management
       </a>
       
         
@@ -519,29 +441,28 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#webworkers" class="md-nav__link">
-    WebWorkers
+  <a href="#straightel" class="md-nav__link">
+    straight.el
   </a>
+  
+    <nav class="md-nav" aria-label="straight.el">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#building-up-the-webworker" class="md-nav__link">
-    Building up the WebWorker
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#using-our-webworker" class="md-nav__link">
-    Using our WebWorker
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#using-deno-with-webworkers" class="md-nav__link">
-    Using Deno with WebWorkers
+  <a href="#use-package" class="md-nav__link">
+    use-package
   </a>
   
 </li>
@@ -554,12 +475,90 @@
   
 
           
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        Deno/Javascript
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Deno/Javascript" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Deno/Javascript
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
             
   
   
   
     <li class="md-nav__item">
-      <a href="../architecture/" class="md-nav__link">
+      <a href="../js/using-deno/" class="md-nav__link">
+        Using Deno
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../js/getting-started/" class="md-nav__link">
+        Getting started
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../js/main-features/" class="md-nav__link">
+        Basic features
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../js/adv-features/" class="md-nav__link">
+        Advanced features
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../js/architecture/" class="md-nav__link">
         Architecture
       </a>
     </li>
@@ -580,7 +579,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../webrender/" class="md-nav__link">
+      <a href="../webrender/" class="md-nav__link">
         Webrender
       </a>
     </li>
@@ -595,7 +594,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ng-module/" class="md-nav__link">
+      <a href="../ng-module/" class="md-nav__link">
         Dynamic modules
       </a>
     </li>
@@ -610,7 +609,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../faq/" class="md-nav__link">
+      <a href="../faq/" class="md-nav__link">
         FAQ
       </a>
     </li>
@@ -646,7 +645,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../handbook/getting-started/" class="md-nav__link">
+      <a href="../handbook/getting-started/" class="md-nav__link">
         Getting started
       </a>
     </li>
@@ -658,7 +657,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../handbook/build/" class="md-nav__link">
+      <a href="../handbook/build/" class="md-nav__link">
         Build
       </a>
     </li>
@@ -670,7 +669,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../handbook/tests/" class="md-nav__link">
+      <a href="../handbook/tests/" class="md-nav__link">
         Tests
       </a>
     </li>
@@ -682,7 +681,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../handbook/lisp-fn/" class="md-nav__link">
+      <a href="../handbook/lisp-fn/" class="md-nav__link">
         lisp-fn
       </a>
     </li>
@@ -694,7 +693,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../handbook/types/" class="md-nav__link">
+      <a href="../handbook/types/" class="md-nav__link">
         Types
       </a>
     </li>
@@ -732,29 +731,28 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#webworkers" class="md-nav__link">
-    WebWorkers
+  <a href="#straightel" class="md-nav__link">
+    straight.el
   </a>
+  
+    <nav class="md-nav" aria-label="straight.el">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#building-up-the-webworker" class="md-nav__link">
-    Building up the WebWorker
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#using-our-webworker" class="md-nav__link">
-    Using our WebWorker
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#using-deno-with-webworkers" class="md-nav__link">
-    Using Deno with WebWorkers
+  <a href="#use-package" class="md-nav__link">
+    use-package
   </a>
   
 </li>
@@ -771,56 +769,57 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/emacs-ng/emacs-ng/edit/master/docs/js/adv-features.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/emacs-ng/emacs-ng/edit/master/docs/package-management.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="advanced-features">Advanced Features<a class="headerlink" href="#advanced-features" title="Permanent link">#</a></h1>
-<p>This section assumes you have completed "Getting Started" and "Using Deno" and have a basic familiarization with the elisp JavaScript API.</p>
-<h2 id="webworkers">WebWorkers<a class="headerlink" href="#webworkers" title="Permanent link">#</a></h2>
-<p>One of the big draws of emacs-ng is parallel scripting. You may or may not be familiar with the fact that vanilla emacs had lisp threads that you could create via <code>(make-thread FUNC)</code>. Lisp threads were concurrent, but not parallel. In addition to that limitation, lisp threads that were not the 'main thread' would only execute at specific times during emacs event loop.</p>
-<p>WebWorkers give you parallelism. Under the hood, they are spinning up a Rust std::thread (in C terms, this is analogous to a pthread). Due to this, there is a limited interface to exchange data between threads.</p>
-<h2 id="building-up-the-webworker">Building up the WebWorker<a class="headerlink" href="#building-up-the-webworker" title="Permanent link">#</a></h2>
-<p>We will start by creating the JavaScript our WebWorker will execute. Create a file named "web-worker.js" and insert the following:</p>
-<div class="highlight"><pre><span></span><code><span class="nx">self</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="p">(</span><span class="nx">input</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="kd">let</span> <span class="p">{</span> <span class="nx">message</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">input</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
-    <span class="nx">message</span> <span class="o">+=</span> <span class="s2">&quot; And My Axe &quot;</span><span class="p">;</span>
-    <span class="nx">self</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">({</span> <span class="nx">message</span> <span class="p">});</span>
-    <span class="nx">self</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
-<span class="p">};</span>
+                <h1 id="built-in-emacs-lisp-packages">Built-in Emacs Lisp packages<a class="headerlink" href="#built-in-emacs-lisp-packages" title="Permanent link">#</a></h1>
+<p>emacs-ng distributed with more built-in Emacs Lisp packages than
+upstream GNU Emacs.  For now, we have
+<a href="https://github.com/raxod502/straight.el/tree/develop">straight.el</a>
+<code>08b0ecf</code> and <a href="https://github.com/jwiegley/use-package">use-package</a>
+<code>a7422fb</code> included.</p>
+<h2 id="straightel"><code>straight.el</code><a class="headerlink" href="#straightel" title="Permanent link">#</a></h2>
+<p>We are kind of using <code>straight.el</code> as an alternative of <code>package.el</code>,
+providing <code>ng-straight-bootstrap-at-startup</code>, <code>ng-bootstrap-straight</code>
+(as equipment of <code>package-enable-at-startup</code> and
+<code>package-initialize</code>).</p>
+<h3 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">#</a></h3>
+<p>Emacs NG automatically bootstraps <code>straight.el</code> at startup if
+<code>ng-straight-bootstrap-at-startup</code> is set to <code>t</code>, the default value is
+<code>nil</code></p>
+<p>You must configure the built-in <code>straight.el</code> in the early init file,
+as the variable <code>ng-straight-bootstrap-at-startup</code> is read before
+loading the regular init file. There are some variables you may be
+interested in (some of them must be set <strong>before</strong> the bootstrap
+process, if they might affect how <code>straight.el</code> itself is loaded). You
+can find the details from <a href="https://github.com/raxod502/straight.el/tree/develop#getting-started">this
+section</a>
+of the <code>straight.el</code>'s documentation.</p>
+<p>To be compatible with upstream Emacs, you can place the following in
+your init-file:</p>
+<div class="highlight"><pre><span></span><code>(unless (fboundp &#39;ng-bootstrap-straight)
+  (defvar bootstrap-version)
+  (let ((bootstrap-file
+         (expand-file-name &quot;straight/repos/straight.el/bootstrap.el&quot; user-emacs-directory))
+        (bootstrap-version 5))
+    (unless (file-exists-p bootstrap-file)
+      (with-current-buffer
+          (url-retrieve-synchronously
+           &quot;https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el&quot;
+           &#39;silent &#39;inhibit-cookies)
+        (goto-char (point-max))
+        (eval-print-last-sexp)))
+    (load bootstrap-file nil &#39;nomessage)))
 </code></pre></div>
-<p>WebWorkers communicate via two special functions, postMessage and onmessage. onmessage will be called once our parent thread sends us a message, while we can use postMessage to send data back to the main thread. This example is appending a string to its input and handing that back to the main thread. We also called the <code>close</code> function, meaning that this WebWorker is "one and done", and will shut down once it has performed this operation a single time. If we did not call close, the worker would stay alive and await additional messages.</p>
-<h2 id="using-our-webworker">Using our WebWorker<a class="headerlink" href="#using-our-webworker" title="Permanent link">#</a></h2>
-<p>Create a new file with the following code:</p>
-<div class="highlight"><pre><span></span><code><span class="kr">declare</span> <span class="kd">var</span> <span class="nx">lisp</span>: <span class="kt">any</span><span class="p">;</span>
-
-<span class="kd">const</span> <span class="nx">worker</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Worker</span><span class="p">(</span><span class="k">new</span> <span class="nx">URL</span><span class="p">(</span><span class="s2">&quot;web-worker.js&quot;</span><span class="p">,</span> <span class="k">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">url</span><span class="p">).</span><span class="nx">href</span><span class="p">,</span>
-    <span class="p">{</span>
-        <span class="kd">type</span><span class="o">:</span> <span class="s2">&quot;module&quot;</span><span class="p">,</span>
-        <span class="nx">deno</span>: <span class="kt">true</span><span class="p">,</span>
-    <span class="p">});</span>
-
-<span class="nx">worker</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="p">(</span><span class="nx">output</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="kd">const</span> <span class="p">{</span> <span class="nx">message</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">output</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
-    <span class="c1">// This is safe because our callback is back</span>
-    <span class="c1">// on the main thread.</span>
-    <span class="nx">lisp</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="nx">worker</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;You have my sword .... &quot;</span> <span class="p">});</span>
-</code></pre></div>
-<p>This code spins up our WebWorker and passes it a message. Running this code with <code>eval-ts-buffer</code> should print a reference to a cool little obscure movie in your minibuffer.</p>
-<h2 id="using-deno-with-webworkers">Using Deno with WebWorkers<a class="headerlink" href="#using-deno-with-webworkers" title="Permanent link">#</a></h2>
-<p>WebWorkers do not have access to elisp functions - you will notice that if you attempt to use the <code>lisp</code> object you will get an error that it is not defined. However, WebWorkers do have full access to Deno.</p>
-<p>The recommended usage for WebWorkers is to</p>
-<ol>
-<li>Identify the slow or blocking portion of your existing or new elisp code</li>
-<li>Write your webworker to perform the operation and data manipulation and translate the results to a format that elisp will be able to use. I.e. if you want to walk a directory and return all files ending in "foo", perform that logic and construct the array on your WebWorker, and send that array to your main thread via sendMessage. Once your mainThread receives that information, you can call your elisp code to display it.</li>
-</ol>
-<p>It's recommended to avoid WebWorkers for pure I/O or subprocess operations. Instead, use Deno's built in async I/O capabilities <a href="https://deno.land/manual@v1.6.3/examples">outlined in their documentation</a>. You should use WebWorkers when you have significant calculation or operation to perform on the returned data. An example would be: Don't use a webworker to just run <code>git status</code>. You may want to use a WebWorker if you are running git status, opening each file, and performing complex logic on each line of the file, and then returning a list of strings back to lisp for display.</p>
-<p>You can see their example for <a href="https://deno.land/manual@v1.6.3/examples/subprocess">spawning a subprocess</a> to see what the platform is capable of. This can allow for things normally handled by tramp -&gt; you could ssh into a box, get a list of files, and then actually perform scripting logic on that result prior to passing it back to lisp for display. Current elisp can handle about half of that, however once ssh, or whatever process returns those results, any logic on the subprocesses output will be blocking the editor.</p>
-<p>You can also reference <a href="https://github.com/DavidDeSimone/ng-fuzzy-search">this module</a> as another example.</p>
+<p>For more detailed guide, please refer <a href="https://github.com/raxod502/straight.el/blob/develop/README.md">straight.el's
+READMD.md</a>.</p>
+<h2 id="use-package"><code>use-package</code><a class="headerlink" href="#use-package" title="Permanent link">#</a></h2>
+<p>There are also
+<a href="https://github.com/jwiegley/use-package/issues/282">discussions/efforts</a>
+to include <code>use-package</code> into upstream. Until then, we temporally
+included it with <code>emacs-ng</code>.</p>
                 
                   
                     
@@ -851,7 +850,7 @@
   
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
-        <a href="../main-features/" class="md-footer__link md-footer__link--prev" rel="prev">
+        <a href="../build/nix-develop/" class="md-footer__link md-footer__link--prev" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -860,19 +859,19 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Basic features
+              Nix Build / Develop
             </div>
           </div>
         </a>
       
       
-        <a href="../architecture/" class="md-footer__link md-footer__link--next" rel="next">
+        <a href="../js/using-deno/" class="md-footer__link md-footer__link--next" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Architecture
+              Using Deno
             </div>
           </div>
           <div class="md-footer__button md-icon">
@@ -914,10 +913,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.fb4a9340.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../assets/javascripts/workers/search.fb4a9340.min.js", "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.5cf3e710.min.js"></script>
+      <script src="../assets/javascripts/bundle.5cf3e710.min.js"></script>
       
     
   </body>
